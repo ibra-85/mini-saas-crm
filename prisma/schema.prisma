@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client"
   output   = "../app/generated/prisma"
@@ -9,116 +10,122 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(cuid())
-  email     String     @unique
+  id        String   @id @default(cuid())
+  email     String   @unique
   name      String?
   password  String?
-  role      Role       @default(USER)
-  plan      Plan       @default(FREE)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  role      Role     @default(USER)
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  customers Customer[]
-  quotes    Quote[]
-  invoices  Invoice[]
+  customers     Customer[]
+  quotes        Quote[]
+  invoices      Invoice[]
+  emailVerified Boolean    @default(false)
+  image         String?
+  sessions      Session[]
+  accounts      Account[]
+
+  @@map("user")
 }
 
 model Customer {
-  id        String    @id @default(cuid())
-  user      User      @relation(fields: [userId], references: [id])
-  userId    String
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 
   name      String
   email     String?
   company   String?
   vatNumber String?
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  quotes    Quote[]
-  invoices  Invoice[]
+  quotes   Quote[]
+  invoices Invoice[]
 }
 
 model Quote {
-  id           String       @id @default(cuid())
-  user         User         @relation(fields: [userId], references: [id])
-  userId       String
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 
-  customer     Customer     @relation(fields: [customerId], references: [id])
-  customerId   String
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String
 
-  status       QuoteStatus  @default(DRAFT)
-  title        String?
-  notes        String?
+  status QuoteStatus @default(DRAFT)
+  title  String?
+  notes  String?
 
-  subtotal     Decimal      @default(0)
-  vatTotal     Decimal      @default(0)
-  total        Decimal      @default(0)
+  subtotal Decimal @default(0)
+  vatTotal Decimal @default(0)
+  total    Decimal @default(0)
 
-  publicId     String?      @unique
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  publicId  String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  items        QuoteItem[]
-  invoice      Invoice?
+  items   QuoteItem[]
+  invoice Invoice?
 }
 
 model QuoteItem {
-  id        String   @id @default(cuid())
-  quote     Quote    @relation(fields: [quoteId], references: [id])
-  quoteId   String
+  id      String @id @default(cuid())
+  quote   Quote  @relation(fields: [quoteId], references: [id])
+  quoteId String
 
   label     String
-  quantity  Int      @default(1)
-  unitPrice Decimal  @default(0)
-  vatRate   Float    @default(0)
+  quantity  Int     @default(1)
+  unitPrice Decimal @default(0)
+  vatRate   Float   @default(0)
 
-  lineTotal Decimal  @default(0)
+  lineTotal Decimal @default(0)
 }
 
 model Invoice {
-  id           String         @id @default(cuid())
-  user         User           @relation(fields: [userId], references: [id])
-  userId       String
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 
-  customer     Customer       @relation(fields: [customerId], references: [id])
-  customerId   String
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String
 
-  quoteId      String?        @unique
-  quote        Quote?         @relation(fields: [quoteId], references: [id])
+  quoteId String? @unique
+  quote   Quote?  @relation(fields: [quoteId], references: [id])
 
-  status       InvoiceStatus  @default(UNPAID)
+  status InvoiceStatus @default(UNPAID)
 
-  number       String?        @unique
-  issueDate    DateTime       @default(now())
-  dueDate      DateTime?
+  number    String?   @unique
+  issueDate DateTime  @default(now())
+  dueDate   DateTime?
 
-  subtotal     Decimal        @default(0)
-  vatTotal     Decimal        @default(0)
-  total        Decimal        @default(0)
+  subtotal Decimal @default(0)
+  vatTotal Decimal @default(0)
+  total    Decimal @default(0)
 
-  publicId     String?        @unique
-  stripePaymentIntentId     String?
-  stripeCheckoutSessionId   String?
+  publicId                String? @unique
+  stripePaymentIntentId   String?
+  stripeCheckoutSessionId String?
 
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  items        InvoiceItem[]
+  items InvoiceItem[]
 }
 
 model InvoiceItem {
-  id        String   @id @default(cuid())
-  invoice   Invoice  @relation(fields: [invoiceId], references: [id])
+  id        String  @id @default(cuid())
+  invoice   Invoice @relation(fields: [invoiceId], references: [id])
   invoiceId String
 
   label     String
-  quantity  Int      @default(1)
-  unitPrice Decimal  @default(0)
-  vatRate   Float    @default(0)
+  quantity  Int     @default(1)
+  unitPrice Decimal @default(0)
+  vatRate   Float   @default(0)
 
-  lineTotal Decimal  @default(0)
+  lineTotal Decimal @default(0)
 }
 
 enum QuoteStatus {
@@ -142,4 +149,49 @@ enum Role {
 enum Plan {
   FREE
   PRO
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@map("verification")
 }

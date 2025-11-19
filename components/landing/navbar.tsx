@@ -5,6 +5,7 @@ import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ToggleThemeButton } from "@/components/theme/toggle-theme-button";
+import { redirect } from "next/navigation";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,24 +23,18 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "border-b bg-background/80 backdrop-blur-md dark:bg-background/70"
-          : ""
+          && "bg-background/80 backdrop-blur-md dark:bg-background/70"
       )}
     >
       <div className="flex justify-between items-center container mx-auto px-4 lg:px-12">
-        <div
-          className={cn(
-            "flex items-center justify-center gap-16 px-6 transition-all duration-300",
-            isScrolled ? "h-20" : "h-18"
-          )}
-        >
+        <div className="flex items-center justify-center gap-16 px-6 transition-all duration-300 h-18">
           {/* Logo */}
-          <div className="flex items-center gap-2 justify-center">
+          <a href="/" className="flex items-center gap-2 justify-center">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-primary/90 to-emerald-500/70 dark:from-black/50 dark:to-emerald-500/40">
               <Sparkles className="h-4 w-4 text-secondary dark:text-primary" />
             </div>
             <span className="text-lg font-semibold">InvoiceAI</span>
-          </div>
+          </a>
 
           {/* Navigation Links */}
           <div className="hidden items-center gap-8 md:flex">
@@ -71,7 +66,7 @@ export function Navbar() {
         </div>
 
         <div className="flex justify-center gap-3">
-          <Button className="rounded-[12px]">Se connecter</Button>
+          <Button className="rounded-[12px]" onClick={() => redirect('/login')}>Se connecter</Button>
           <ToggleThemeButton className="rounded-[12px]" />
         </div>
       </div>
