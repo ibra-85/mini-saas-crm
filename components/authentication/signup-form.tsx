@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useMemo } from "react"
-import { Check, Eye, EyeOff, X } from "lucide-react"
+import { Check, Eye, EyeOff, X, Loader2 } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
 import {
   Card,
@@ -336,9 +336,14 @@ export function SignupForm({
               <FieldGroup>
                 <Field className="flex flex-col gap-2">
                   <Button type="submit" disabled={loading}>
-                    {loading
-                      ? "Création du compte..."
-                      : "Créer un compte"}
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Création du compte...
+                      </>
+                    ) : (
+                      "Créer un compte"
+                    )}
                   </Button>
                   <FieldDescription className="text-center">
                     Vous avez déjà un compte ?{" "}
@@ -354,12 +359,12 @@ export function SignupForm({
       </Card>
 
       <FieldDescription className="px-6 text-center">
-        En cliquant sur Continuer, vous acceptez nos{" "}
-        <a href="#" className="underline">
+        En créant un compte, vous acceptez nos{" "}
+        <a href="/cgv" className="underline hover:text-foreground transition-colors">
           Conditions d&apos;utilisation
         </a>{" "}
         et notre{" "}
-        <a href="#" className="underline">
+        <a href="/confidentialite" className="underline hover:text-foreground transition-colors">
           Politique de confidentialité
         </a>
         .

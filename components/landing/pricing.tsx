@@ -43,7 +43,7 @@ export function Pricing() {
             Commencez gratuitement, upgradez quand vous voulez
           </h2>
           <p className="text-sm text-muted-foreground md:text-base">
-            Testez Mini SaaS CRM sans carte bancaire. Passez au plan Pro quand
+            Testez InvoiceAI sans carte bancaire. Passez au plan Pro quand
             il vous fait gagner du temps (et de l&apos;argent).
           </p>
         </div>
@@ -53,7 +53,7 @@ export function Pricing() {
             <Card
               key={plan.name}
               className={`flex flex-col  ${
-                plan.popular ? "ring-2 ring-primary shadow-lg shadow-sky-500/10" : ""
+                plan.popular ? "ring-2 ring-emerald-500/50 shadow-lg shadow-emerald-500/10" : ""
               }`}
             >
               <CardHeader className="space-y-1">

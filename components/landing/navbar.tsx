@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ToggleThemeButton } from "@/components/theme/toggle-theme-button";
-import { redirect } from "next/navigation";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,7 +13,7 @@ export function Navbar() {
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
 
-    handleScroll(); // état initial
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -29,12 +29,12 @@ export function Navbar() {
       <div className="flex justify-between items-center container mx-auto px-4 lg:px-12">
         <div className="flex items-center justify-center gap-16 px-6 transition-all duration-300 h-18">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 justify-center">
+          <Link href="/" className="flex items-center gap-2 justify-center">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-primary/90 to-emerald-500/70 dark:from-black/50 dark:to-emerald-500/40">
               <Sparkles className="h-4 w-4 text-secondary dark:text-primary" />
             </div>
             <span className="text-lg font-semibold">InvoiceAI</span>
-          </a>
+          </Link>
 
           {/* Navigation Links */}
           <div className="hidden items-center gap-8 md:flex">
@@ -51,22 +51,24 @@ export function Navbar() {
               Tarifs
             </a>
             <a
-              href="#about"
+              href="#for-who"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground dark:text-[#d5d5d5] dark:hover:text-foreground"
             >
-              À propos
+              Pour qui ?
             </a>
             <a
-              href="#contact"
+              href="#faq"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground dark:text-[#d5d5d5] dark:hover:text-foreground"
             >
-              Contact
+              FAQ
             </a>
           </div>
         </div>
 
         <div className="flex justify-center gap-3">
-          <Button className="rounded-[12px]" onClick={() => redirect('/login')}>Se connecter</Button>
+          <Button className="rounded-[12px]" asChild>
+            <Link href="/login">Se connecter</Link>
+          </Button>
           <ToggleThemeButton className="rounded-[12px]" />
         </div>
       </div>

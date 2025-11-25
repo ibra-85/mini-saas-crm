@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { signIn } from "@/lib/auth-client"
 import { useRouter, useSearchParams } from "next/navigation"
-import { Eye, EyeOff, AlertCircle } from "lucide-react"
+import { Eye, EyeOff, Loader2 } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
 
 export function LoginForm({
@@ -77,7 +77,7 @@ export function LoginForm({
                   variant="outline"
                   type="button"
                   disabled
-                  className="w-full"
+                  className="w-full relative"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
                     <path
@@ -85,7 +85,10 @@ export function LoginForm({
                       fill="currentColor"
                     />
                   </svg>
-                  Se connecter avec Google
+                  Google
+                  <span className="absolute right-3 text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+                    Bientôt
+                  </span>
                 </Button>
               </Field>
 
@@ -160,7 +163,14 @@ export function LoginForm({
               {/* Bouton submit */}
               <Field className="mt-3">
                 <Button type="submit" disabled={loading} className="w-full">
-                  {loading ? "Connexion..." : "Se connecter"}
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Connexion...
+                    </>
+                  ) : (
+                    "Se connecter"
+                  )}
                 </Button>
 
                 <FieldDescription className="text-center">

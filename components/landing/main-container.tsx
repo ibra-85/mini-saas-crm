@@ -10,33 +10,12 @@ type MainContainerProps = {
 export function MainContainer({ children }: MainContainerProps) {
   return (
     <div className="relative flex min-h-screen w-full justify-center overflow-hidden">
-      
-      {/* Glow animé */}
-      <div className="pointer-events-none absolute inset-0 -z-20">
-        <motion.div
-          initial={{ opacity: 0.35, scale: 1 }}
-          animate={{
-            opacity: [0.35, 0.8, 0.35],
-            scale: [1, 1.12, 1],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            repeatType: "loop",
-            ease: "easeInOut",
-          }}
-          className="
-            absolute inset-0
-            bg-[radial-gradient(circle_at_50%_-120%,#34d399_0%,transparent_70%)]
-            mask-[radial-gradient(circle_at_50%_-120%,black_40%,transparent_75%)]
-            dark:bg-[radial-gradient(circle_at_50%_-120%,#10b981_0%,transparent_70%)]
-            dark:mask-[radial-gradient(circle_at_50%_-120%,black_40%,transparent_75%)]
-
-            will-change-transform will-change-opacity
-          "
-        />
+      {/* glow soft */}
+      <div className="z-2 absolute inset-0 pointer-events-none isolate opacity-50 contain-strict hidden lg:block">
+        <div className="w-140 -right-20 -translate-y-[350px] absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
+        <div className="h-320 absolute left-0 top-0 w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.12)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
+        <div className="h-320 -translate-y-[350px] absolute left-0 top-0 w-56 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.08)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
       </div>
-
       {/* Contenu */}
       <div className="relative z-10 flex min-h-screen w-full max-w-[1260px] flex-col">
         {children}
