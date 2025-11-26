@@ -30,7 +30,7 @@ const FAQ_ITEMS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="border-b">
+    <section id="faq" className="relative">
       <div className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
         <div className="mb-6 space-y-2 text-center">
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
@@ -63,6 +63,8 @@ export function FAQ() {
           ))}
         </Accordion>
       </div>
+      {/* Faded border */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl h-px bg-gradient-to-r from-transparent from-10% via-border via-50% to-transparent to-90%" />
     </section>
   );
 }
