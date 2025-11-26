@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import { ToggleThemeButton } from "@/components/theme/toggle-theme-button";
 
 export function Footer() {
   return (
@@ -9,7 +10,7 @@ export function Footer() {
           {/* Logo + description */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-primary/90 to-emerald-500/70 dark:from-black/50 dark:to-emerald-500/40">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-primary/90 to-primary/70 dark:from-black/50 dark:to-primary/40">
                 <Sparkles className="h-4 w-4 text-secondary dark:text-primary" />
               </div>
               <span className="text-lg font-semibold">InvoiceAI</span>
@@ -51,7 +52,10 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border/50 pt-6 text-xs text-muted-foreground md:flex-row">
           <span>© {new Date().getFullYear()} InvoiceAI. Tous droits réservés.</span>
-          <span>Fait avec ❤️ en France</span>
+          <div className="flex items-center gap-3">
+            <span>Fait avec ❤️ en France</span>
+            <ToggleThemeButton className="rounded-[12px]" />
+          </div>
         </div>
       </div>
     </footer>

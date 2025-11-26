@@ -6,8 +6,16 @@ import { Button } from "@/components/ui/button"
 import { AnimatedBadge } from "@/components/ui-enhanced/animated-badge"
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { 
+    opacity: 0, 
+    y: 20,
+    filter: "blur(10px)"
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    filter: "blur(0px)"
+  },
 }
 
 const staggerContainer = {
@@ -24,37 +32,14 @@ const staggerContainer = {
 export function Hero() {
   return (
     <section className="relative w-full pt-42 pb-24 md:pt-52 md:pb-32">
-      {/* Grid container - full width */}
-      <div 
-        className="absolute inset-0 pointer-events-none -z-10 overflow-hidden"
-        style={{
-          left: '50%',
-          right: '50%',
-          marginLeft: '-50vw',
-          marginRight: '-50vw',
-          width: '100vw',
-        }}
-      >
-        {/* Grid lines */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)
-            `,
-            backgroundSize: '64px 64px',
-          }}
-        />
-
-        {/* Vignette - darkens all edges */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            boxShadow: 'inset 0 0 200px 100px rgba(0,0,0,0.8)',
-          }}
-        />
+      {/* glow soft & glitter */}
+      <div className="z-2 absolute inset-0 pointer-events-none isolate opacity-50 contain-strict hidden lg:block">
+        <div className="w-140 -right-20 -translate-y-[350px] absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
+        <div className="h-320 absolute left-0 top-0 w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.12)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
+        <div className="h-320 -translate-y-[350px] absolute left-0 top-0 w-56 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.08)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
       </div>
+      <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(75,75,75,0.15),transparent_70%)]" />
+
       {/* Text block centered */}
       <motion.div 
         className="mx-auto max-w-[1000px] px-4 text-center"
@@ -72,7 +57,7 @@ export function Hero() {
         >
           Gérez vos devis et factures
           <br />
-          <span className="bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
             sans prise de tête.
           </span>
         </motion.h1>
@@ -90,7 +75,7 @@ export function Hero() {
           className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
           variants={fadeInUp}
         >
-          <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-500/20" asChild>
+          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20" asChild>
             <Link href="/register">Commencer gratuitement</Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
@@ -109,13 +94,13 @@ export function Hero() {
       {/* MASSIVE mockup like Superior */}
       <motion.div 
         className="mx-auto mt-20 max-w-[1400px] px-4"
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
+        initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(10px)" }}
+        animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="relative rounded-3xl border bg-card/80 p-4 md:p-6 shadow-2xl backdrop-blur">
           {/* optional very-light glow around mockup */}
-          <div className="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-[radial-gradient(80%_80%_at_50%_0%,rgba(16,185,129,0.14)_0,transparent_70%)] dark:bg-[radial-gradient(80%_80%_at_50%_0%,rgba(16,185,129,0.25)_0,transparent_70%)]" />
+          <div className="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-[radial-gradient(80%_80%_at_50%_0%,oklch(var(--primary)/0.14)_0,transparent_70%)] dark:bg-[radial-gradient(80%_80%_at_50%_0%,oklch(var(--primary)/0.25)_0,transparent_70%)]" />
 
           {/* top section */}
           <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
@@ -123,7 +108,7 @@ export function Hero() {
               <p className="text-xs text-muted-foreground">Chiffre d’affaires du mois</p>
               <p className="text-4xl font-bold">4 320 €</p>
             </div>
-            <span className="rounded-full bg-emerald-500/10 px-4 py-1 text-sm font-medium text-emerald-500">
+            <span className="rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
               +38% vs mois dernier
             </span>
           </div>
@@ -141,7 +126,7 @@ export function Hero() {
             <div className="rounded-xl border bg-background/80 p-4">
               <p className="font-medium">Facture · Branding</p>
               <p className="text-muted-foreground text-xs">Payée par virement</p>
-              <span className="mt-3 inline-block rounded-full bg-emerald-500/10 px-3 py-1 text-xs text-emerald-600">
+              <span className="mt-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs text-primary">
                 Payé
               </span>
             </div>
@@ -158,7 +143,7 @@ export function Hero() {
           <div className="mt-8 flex flex-wrap items-center justify-between border-t pt-4 text-xs text-muted-foreground">
             <span>Relances automatiques activées</span>
             <div className="inline-flex items-center gap-1 rounded-full bg-muted px-3 py-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
               <span>Stripe connecté</span>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
 
 // Routes that require authentication
 const protectedRoutes = ["/dashboard"];
@@ -22,19 +23,20 @@ export async function proxy(request: NextRequest) {
         return NextResponse.next();
     }
 
-    // Check for session cookie (Better Auth uses "better-auth.session_token" by default)
-    const sessionCookie = request.cookies.get("better-auth.session_token");
-    const hasSession = !!sessionCookie?.value;
+    // Get session using better-auth API (validates the session properly)
+    const session = await auth.api.getSession({
+        headers: request.headers,
+    });
 
-    // If trying to access protected route without session, redirect to login
-    if (isProtectedRoute && !hasSession) {
+    // If trying to access protected route without valid session, redirect to login
+    if (isProtectedRoute && !session?.user) {
         const loginUrl = new URL("/login", request.url);
         loginUrl.searchParams.set("callbackUrl", pathname);
         return NextResponse.redirect(loginUrl);
     }
 
-    // If trying to access auth route with session, redirect to dashboard
-    if (isAuthRoute && hasSession) {
+    // If trying to access auth route with valid session, redirect to dashboard
+    if (isAuthRoute && session?.user) {
         return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 

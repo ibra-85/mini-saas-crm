@@ -30,7 +30,7 @@ export function AnimatedBadge() {
           className="absolute inset-0 rounded-full"
           style={{
             background:
-              "radial-gradient(46% 90% at var(--x) var(--y), rgba(52,211,153,0.8) 0%, rgba(148,163,184,0.2) 40%, rgba(0,0,0,0) 100%)",
+              "radial-gradient(46% 90% at var(--x) var(--y), color-mix(in oklch, var(--primary) 80%, transparent) 0%, rgba(148,163,184,0.2) 40%, rgba(0,0,0,0) 100%)",
           }}
         />
 
@@ -45,8 +45,8 @@ export function AnimatedBadge() {
           <span
             className="
               inline-flex items-center rounded-full border px-1.5 py-0.5 text-[11px] font-semibold
-              border-emerald-300 bg-emerald-500/10 text-emerald-700
-              dark:border-emerald-400/40 dark:bg-emerald-500/20 dark:text-emerald-300
+              border-primary/30 bg-primary/10 text-primary
+              dark:border-primary/40 dark:bg-primary/20 dark:text-primary
             "
           >
             Nouveau

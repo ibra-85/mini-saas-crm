@@ -53,7 +53,7 @@ export function Pricing() {
             <Card
               key={plan.name}
               className={`flex flex-col  ${
-                plan.popular ? "ring-2 ring-emerald-500/50 shadow-lg shadow-emerald-500/10" : ""
+                plan.popular ? "ring-2 ring-primary/50 shadow-lg shadow-primary/10" : ""
               }`}
             >
               <CardHeader className="space-y-1">
