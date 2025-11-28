@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BadgeCheck, Sparkles } from "lucide-react";
+import { appConfig } from "@/lib/config";
 
 const PLANS = [
   {
@@ -59,7 +60,7 @@ export function Pricing() {
             Commencez gratuitement, upgradez quand vous voulez
           </h2>
           <p className="text-base text-muted-foreground md:text-lg max-w-2xl mx-auto">
-            Testez InvoiceAI sans carte bancaire. Passez au plan Pro quand
+            Testez {appConfig.name} sans carte bancaire. Passez au plan Pro quand
             il vous fait gagner du temps (et de l&apos;argent).
           </p>
         </motion.div>

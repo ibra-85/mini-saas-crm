@@ -5,6 +5,7 @@ import { Sparkles, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { appConfig } from "@/lib/config";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,7 +53,7 @@ export function Navbar() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-primary/90 to-primary/70 dark:from-black/50 dark:to-primary/40">
               <Sparkles className="h-4 w-4 text-secondary dark:text-primary" />
             </div>
-            <span className="text-lg font-semibold">InvoiceAI</span>
+            <span className="text-lg font-semibold">{appConfig.name}</span>
           </Link>
 
           {/* Navigation Links Desktop */}

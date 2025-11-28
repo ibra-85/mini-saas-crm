@@ -4,6 +4,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import { appConfig } from "@/lib/config";
 
 const FAQ_ITEMS = [
   {
@@ -20,7 +21,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Est-ce adapté aux auto-entrepreneurs ?",
-    a: "Oui, Mini SaaS CRM a été conçu à la base pour les freelances et auto-entrepreneurs.",
+    a: `Oui, ${appConfig.name} a été conçu à la base pour les freelances et auto-entrepreneurs.`,
   },
   {
     q: "Puis-je importer mes anciens clients ?",

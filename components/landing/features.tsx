@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Users, FileText, Receipt, TrendingUp, Zap, CheckCircle2 } from "lucide-react";
+import { appConfig } from "@/lib/config";
 
 const FEATURES = [
   {
@@ -86,7 +87,7 @@ export function Features() {
             Tout ce qu'il faut pour gérer votre activité
           </h2>
           <p className="text-base text-muted-foreground md:text-lg max-w-2xl mx-auto">
-            Du premier contact à la facture payée, InvoiceAI vous suit à
+            Du premier contact à la facture payée, {appConfig.name} vous suit à
             chaque étape avec des outils puissants et simples.
           </p>
         </motion.div>

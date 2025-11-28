@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Wix_Madefor_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { appConfig } from "@/lib/config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,12 +20,12 @@ const wixMadeForDisplay = Wix_Madefor_Display({
 });
 
 export const metadata: Metadata = {
-  title: "InvoiceAI - Gérez vos devis et factures sans prise de tête",
-  description: "InvoiceAI centralise vos clients, simplifie la création de devis, automatise les factures et vous aide à encaisser plus vite. Idéal pour freelances et petites équipes.",
+  title: `${appConfig.name} - Gérez vos devis et factures sans prise de tête`,
+  description: `${appConfig.name} centralise vos clients, simplifie la création de devis, automatise les factures et vous aide à encaisser plus vite. Idéal pour freelances et petites équipes.`,
   keywords: ["facturation", "devis", "factures", "freelance", "auto-entrepreneur", "gestion clients", "paiement"],
-  authors: [{ name: "InvoiceAI" }],
+  authors: [{ name: appConfig.name }],
   openGraph: {
-    title: "InvoiceAI - Gérez vos devis et factures sans prise de tête",
+    title: `${appConfig.name} - Gérez vos devis et factures sans prise de tête`,
     description: "Simplifiez votre facturation. Gérez devis, factures et paiements sans prise de tête.",
     type: "website",
   },

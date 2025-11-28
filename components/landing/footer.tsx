@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
 import { ToggleThemeButton } from "@/components/theme/toggle-theme-button";
+import { appConfig } from "@/lib/config";
 
 export function Footer() {
   return (
@@ -13,7 +14,7 @@ export function Footer() {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-linear-to-br from-primary/90 to-primary/70 dark:from-black/50 dark:to-primary/40">
                 <Sparkles className="h-5 w-5 text-secondary dark:text-primary" />
               </div>
-              <span className="text-xl font-semibold">InvoiceAI</span>
+              <span className="text-xl font-semibold">{appConfig.name}</span>
             </div>
             <p className="max-w-xs text-base text-muted-foreground">
               Simplifiez votre facturation. Gérez devis, factures et paiements sans prise de tête.
@@ -51,7 +52,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 text-sm text-muted-foreground md:flex-row max-w-7xl mx-auto">
-          <span>© {new Date().getFullYear()} InvoiceAI. Tous droits réservés.</span>
+          <span>© {new Date().getFullYear()} {appConfig.name}. Tous droits réservés.</span>
           <div className="flex items-center gap-3">
             <span>Fait avec ❤️ en France</span>
             <ToggleThemeButton className="rounded-[12px]" />

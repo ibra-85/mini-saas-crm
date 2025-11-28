@@ -4,6 +4,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { AnimatedBadge } from "@/components/ui-enhanced/animated-badge"
+import { appConfig } from "@/lib/config"
 import type { CSSProperties } from "react"
 
 const fadeInUp = {
@@ -72,7 +73,7 @@ export function Hero() {
           variants={fadeInUp}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          InvoiceAI centralise vos clients, simplifie la création de devis,
+          {appConfig.name} centralise vos clients, simplifie la création de devis,
           automatise les factures et vous aide à encaisser plus vite —
           sans outil usine à gaz.
         </motion.p>
